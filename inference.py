@@ -1,4 +1,4 @@
-from experta import Fact, KnowledgeEngine, Rule, Field
+from experta import *
 
 # Define Facts
 class MoodStressFact(Fact):
@@ -23,15 +23,25 @@ class MoodStressEngine(KnowledgeEngine):
     def high_stress_anxious(self):
         self.declare(Fact(stress="High", mood_state="Anxious"))
 
-# Collect Inputs
-mood_input = input("How do you feel (e.g., happy, sad, anxious)? ").strip().lower()
-sleep_input = int(input("How many hours did you sleep last night? "))
-activity_input = int(input("How many minutes did you exercise today? "))
-major_event_input = input("Did you have a major event today (yes/no)? ").strip().lower() == "yes"
 
-# Print Results
-for fact in engine.facts.values():
-    if fact.get("stress"):
-        print(f"Stress Level: {fact['stress']}")
-    if fact.get("mood_state"):
-        print(f"Mood: {fact['mood_state']}")
+def main():# Collect Inputs
+    mood_input = input("How do you feel (e.g., happy, sad, anxious)? ").strip().lower()
+    sleep_input = int(input("How many hours did you sleep last night? "))
+    activity_input = int(input("How many minutes did you exercise today? "))
+    major_event_input = input("Did you have a major event today (yes/no)? ").strip().lower() == "yes"
+
+    # Initialize and Run the Engine
+    engine = MoodStressEngine()
+    engine.reset()
+    engine.declare(MoodStressFact(mood=mood_input, sleep=sleep_input, activity=activity_input, major_event=major_event_input))
+    engine.run()
+
+    # Print Results
+    for fact in engine.facts.values():
+        if fact.get("stress"):
+            print(f"Stress Level: {fact['stress']}")
+        if fact.get("mood_state"):
+            print(f"Mood: {fact['mood_state']}")
+
+if __name__ == "__main__":
+    main()

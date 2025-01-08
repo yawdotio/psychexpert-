@@ -10,6 +10,9 @@ def mood_stress():
         sleep = int(request.form['sleep'])
         activity = int(request.form['activity'])
         major_event = request.form['major_event'] == 'yes'
+
+        # print inputs for debugging
+        print(f'Mood: {mood}, Sleep: {sleep}, Activity: {activity}, Major Event: {major_event}')
         
         # Run the engine
         engine = MoodStressEngine()
@@ -19,6 +22,7 @@ def mood_stress():
 
         # Collect Results
         results = {fact['stress']: fact['mood_state'] for fact in engine.facts.values() if 'stress' in fact}
+        print(engine.facts.values())
         return render_template('results.html', results=results)
 
     return render_template('form.html')
