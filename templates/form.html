@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood and Stress Input</title>
+</head>
+<body>
+    <h1>Mood and Stress Expert System</h1>
+    <form method="POST">
+        <label for="mood">Mood:</label>
+        <input type="text" id="mood" name="mood" required><br>
+
+        <label for="sleep">Hours of Sleep:</label>
+        <input type="number" id="sleep" name="sleep" required><br>
+
+        <label for="activity">Minutes of Physical Activity:</label>
+        <input type="number" id="activity" name="activity"><br>
+
+        <label for="major_event">Major Event Today:</label>
+        <select id="major_event" name="major_event">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
